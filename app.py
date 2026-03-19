@@ -7,8 +7,9 @@ from fpdf import FPDF
 from ultralytics import YOLO  # Standard YOLO class handles v10 automatically
 
 # --- STEP 1: PYTORCH SECURITY OVERRIDE ---
-import torch.serialization
-torch.serialization.weights_only_default = False 
+# --- STEP 1: PYTORCH SECURITY OVERRIDE ---
+import torch
+torch.serialization.add_safe_globals(['ultralytics.nn.tasks.DetectionModel']) 
 
 # --- STEP 2: CACHED MODEL LOADING ---
 @st.cache_resource
